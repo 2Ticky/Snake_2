@@ -6,6 +6,8 @@ public:
     int width;
     int height;
     const int snake_length = 3;
+    Direction playerInput = RIGHT;
+    bool playing;
     Square* board;
     std::vector<Square*> snake;
     Game();
@@ -16,5 +18,7 @@ public:
 
     void setSquare();
     void draw();
-
+    void getPlayerInput();
+    void play();
+    void move();
 };

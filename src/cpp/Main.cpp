@@ -2,13 +2,7 @@
 #include <iostream>
 int main()
 {
-    Game game;
-    game.setSnake();
-    game.draw();
-
-    for(Square* snakePart : game.snake)
-    {
-        std::cout << snakePart -> state << std::endl;
-    }
+    Game game(30,30);
+    game.play();
     return 0;
 }
