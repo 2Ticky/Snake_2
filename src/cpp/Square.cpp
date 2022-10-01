@@ -2,7 +2,7 @@
 
 Square::Square()
 {
-    state = EMPTY;
+    state = FOOD;
     direction = RIGHT;
 }
 
