@@ -6,7 +6,7 @@ class Game{
 public:
     int width;
     int height;
-    const int snake_length = 3;
+    const int snake_length = 7;
     Direction playerInput = RIGHT;
     bool playing;
     Square* board;

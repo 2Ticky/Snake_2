@@ -4,7 +4,6 @@
 #include <chrono>
 #include <thread>
 
-
 Game::Game()
 {
     width = 12;
@@ -42,14 +41,9 @@ void Game::play()
     {
         draw();
         std::this_thread::sleep_for(std::chrono::milliseconds(300));
-        getPlayerInput(); 
-        gameOver();
-        
-        if(playing)
-        {
-            move();
-        }
-        
+        getPlayerInput();
+        gameOver(); 
+        if(playing){move();}
     }
 }
 
@@ -138,17 +132,28 @@ void Game::move()
 
 void Game::gameOver()
 {
+   Square* temp = snake[0];
+
     switch(playerInput)
     {
         case UP:
-            playing = (snake[0] - width) -> state != FLOOR_CEILING;
+            temp -= width;
+            break;
         case DOWN:
-            playing = (snake[0] + width) -> state != FLOOR_CEILING;
+            temp += width;
+            break;
         case RIGHT:
-            playing = (snake[0] + 1) -> state != WALL;
+            temp++;
+            break;
         case LEFT:
-            playing = (snake[0] - 1) -> state != WALL;
+            temp--;
+            break;
     }
+
+    playing = temp -> state == EMPTY || temp -> state == FOOD;
+
+    delete temp;
+
 }
 
 void Game::setBorders()
@@ -170,4 +175,3 @@ void Game::setBorders()
     }
 
 }
-
