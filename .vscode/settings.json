@@ -51,5 +51,12 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "typeinfo": "cpp"
-    }
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "c:\\C++Projects\\Snake2\\Snake_2",
+            "binaryPath": "c:\\C++Projects\\Snake2\\Snake_2\\Snake.exe",
+            "binaryArgs": []
+        }
+    ]
 }

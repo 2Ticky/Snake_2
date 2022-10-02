@@ -6,10 +6,11 @@ class Game{
 public:
     int width;
     int height;
-    const int snake_length = 7;
+    const int snake_length = 3;
     Direction playerInput = RIGHT;
     bool playing;
     Square* board;
+    Square* food;
     std::vector<Square*> snake;
     //some strings for drawing the game
     std::string top_bottom_border; // = std::string(width + 2, '=');
@@ -28,4 +29,5 @@ public:
     void move();
     void gameOver();
     void setBorders();
+    void placeFood();
 };

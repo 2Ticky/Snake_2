@@ -3,6 +3,9 @@
 #include <windows.h>
 #include <chrono>
 #include <thread>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 Game::Game()
 {
@@ -36,6 +39,7 @@ void Game::play()
 {
     playing = true;
     setSnake();
+    placeFood();
 
     while(playing)
     {
@@ -150,10 +154,14 @@ void Game::gameOver()
             break;
     }
 
+    
     playing = temp -> state == EMPTY || temp -> state == FOOD;
+    temp = nullptr;
 
-    delete temp;
-
+    if(temp == nullptr)
+    {
+        delete temp;
+    }
 }
 
 void Game::setBorders()
@@ -174,4 +182,35 @@ void Game::setBorders()
         board[i + width * (height - 1)].state = FLOOR_CEILING;
     }
 
+}
+
+void Game::placeFood()
+{
+    Square*freeSquares[(width - 2)*(height - 2) - snake_length];
+    int count = 0;
+
+    for(int i = 0; i < width*height; i++ )
+    {
+        if(board[i].state == EMPTY)
+        {
+            
+            freeSquares[count] = &board[i];
+            count++;
+        }
+    }
+
+    srand(time(NULL));
+    int index = rand() % ((width - 2)*(height - 2) - snake_length);
+    
+    freeSquares[index] -> state = FOOD;
+    
+
+    for(Square* ptr : freeSquares)
+    {
+        ptr = nullptr;
+        if(ptr == nullptr)
+        {
+            delete ptr;
+        }
+    }
 }
