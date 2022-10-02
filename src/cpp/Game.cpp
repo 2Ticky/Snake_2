@@ -43,9 +43,9 @@ void Game::play()
     while(playing)
     {
         draw();
-        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         getPlayerInput();
-        gameOver(); 
+        checkSquare(); 
         if(playing){move();}
     }
 }
@@ -133,7 +133,7 @@ void Game::move()
     }
 }
 
-void Game::gameOver()
+void Game::checkSquare()
 {
    Square* temp = snake[0];
 

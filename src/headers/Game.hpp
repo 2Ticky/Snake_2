@@ -4,30 +4,33 @@
 
 class Game{
 public:
+    Game();
+    Game(int width, int height);
+    ~Game();
+    void play();
+    bool playing;
+
+private:
     int width;
     int height;
     int snake_length = 3;
     Direction playerInput = RIGHT;
-    bool playing;
+    
     Square* board;
     Square* food;
     std::vector<Square*> snake;
     //some strings for drawing the game
-    std::string top_bottom_border; // = std::string(width + 2, '=');
+    std::string top_bottom_border; 
     const char side_border = '|';
 
-    Game();
-    Game(int width, int height);
-    ~Game();
+    
 
     void setSnake();
-
     void setSquare();
     void draw();
     void getPlayerInput();
-    void play();
     void move();
-    void gameOver();
+    void checkSquare();
     void setBorders();
     void placeFood();
     void grow();
