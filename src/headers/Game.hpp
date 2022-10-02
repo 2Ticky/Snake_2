@@ -6,7 +6,7 @@ class Game{
 public:
     int width;
     int height;
-    const int snake_length = 3;
+    int snake_length = 3;
     Direction playerInput = RIGHT;
     bool playing;
     Square* board;
@@ -30,4 +30,5 @@ public:
     void gameOver();
     void setBorders();
     void placeFood();
+    void grow();
 };

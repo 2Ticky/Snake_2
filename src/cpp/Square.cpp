@@ -6,8 +6,8 @@ Square::Square()
     direction = RIGHT;
 }
 
-Square::Square(State state)
+Square::Square(State state, Direction direction)
 {
     this -> state = state;
-    direction = RIGHT;
+    this -> direction = direction;
 }

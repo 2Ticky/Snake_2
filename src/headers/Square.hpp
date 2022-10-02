@@ -20,5 +20,5 @@ struct Square{
     Direction direction;
 
     Square();
-    Square(State state);
+    Square(State state, Direction direction);
 };

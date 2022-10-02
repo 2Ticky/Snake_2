@@ -22,7 +22,6 @@ Game::Game(int width, int height)
     this -> height = height + 2;
     board = new Square[this -> width  * this -> height];
     setBorders();
-
 }
 
 Game::~Game()
@@ -155,7 +154,18 @@ void Game::gameOver()
     }
 
     
-    playing = temp -> state == EMPTY || temp -> state == FOOD;
+    switch(temp -> state)
+    {
+        case FOOD:
+            grow();
+            placeFood();
+            break;
+        case EMPTY:
+            break;
+        default:
+            playing = false;
+    }
+
     temp = nullptr;
 
     if(temp == nullptr)
@@ -174,7 +184,7 @@ void Game::setBorders()
     for(int i = 1; i < height - 1; i++)
     {
         board[width * i].state = WALL;
-        board[width * i + width - 1] = WALL;
+        board[width * i + width - 1].state = WALL;
     }
 
     for(int i = 0; i < width; i++)
@@ -213,4 +223,36 @@ void Game::placeFood()
             delete ptr;
         }
     }
+}
+
+void Game::grow()
+{
+    int index = snake[snake_length - 1] - &board[0];
+    int indexNewTail;
+    switch(board[index].direction)
+    {
+        case RIGHT:
+            indexNewTail = index - 1;
+            board[indexNewTail].state = SNAKE;
+            board[indexNewTail].direction = RIGHT;
+            break;
+        case LEFT:
+            indexNewTail = index + 1;
+            board[indexNewTail].state = SNAKE;
+            board[indexNewTail].direction = LEFT;
+            break;
+        case UP:
+            indexNewTail = index + width;
+            board[indexNewTail].state = SNAKE;
+            board[indexNewTail].direction = UP;
+            break;
+        case DOWN:
+            indexNewTail = index - width;
+            board[indexNewTail].state = SNAKE;
+            board[indexNewTail].direction = DOWN;
+            break;
+    }
+
+    snake.push_back(&board[indexNewTail]);
+    snake_length++;
 }
