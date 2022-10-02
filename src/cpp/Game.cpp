@@ -7,16 +7,20 @@
 
 Game::Game()
 {
-    width = 10;
-    height = 10;
-    board = new Square[width * height];
+    width = 12;
+    height = 12;
+    board = new Square[this -> width  * this -> height]; //add borders
+    setBorders();
 }
 
 Game::Game(int width, int height)
 {
-    this -> width = width;
-    this -> height = height;
-    board = new Square[width * height];
+    //+2 for borders
+    this -> width = width + 2;
+    this -> height = height + 2;
+    board = new Square[this -> width  * this -> height];
+    setBorders();
+
 }
 
 Game::~Game()
@@ -39,9 +43,14 @@ void Game::play()
         draw();
         std::this_thread::sleep_for(std::chrono::milliseconds(300));
         getPlayerInput(); 
-        move();
+        gameOver();
+        
+        if(playing)
+        {
+            move();
+        }
+        
     }
-
 }
 
 void Game::setSnake()
@@ -125,5 +134,40 @@ void Game::move()
         snake[i] -> direction = thisDirect;
         thisDirect = old;
     }
+}
+
+void Game::gameOver()
+{
+    switch(playerInput)
+    {
+        case UP:
+            playing = (snake[0] - width) -> state != FLOOR_CEILING;
+        case DOWN:
+            playing = (snake[0] + width) -> state != FLOOR_CEILING;
+        case RIGHT:
+            playing = (snake[0] + 1) -> state != WALL;
+        case LEFT:
+            playing = (snake[0] - 1) -> state != WALL;
+    }
+}
+
+void Game::setBorders()
+{
+    for(int i = 0; i < width; i++)
+    {
+        board[i].state = FLOOR_CEILING;
+    }
+
+    for(int i = 1; i < height - 1; i++)
+    {
+        board[width * i].state = WALL;
+        board[width * i + width - 1] = WALL;
+    }
+
+    for(int i = 0; i < width; i++)
+    {
+        board[i + width * (height - 1)].state = FLOOR_CEILING;
+    }
+
 }
 

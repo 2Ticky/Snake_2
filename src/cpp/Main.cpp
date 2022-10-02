@@ -2,7 +2,7 @@
 #include <iostream>
 int main()
 {
-    Game game(30,30);
+    Game game(30,20);
     game.play();
     return 0;
 }

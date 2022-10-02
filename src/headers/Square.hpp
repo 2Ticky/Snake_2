@@ -10,7 +10,9 @@ enum Direction : int{
 enum State : char{
     EMPTY = ' ',
     SNAKE = '#',
-    FOOD = '*'
+    FOOD = '*',
+    FLOOR_CEILING = '=',
+    WALL = '|'
 };
 
 struct Square{

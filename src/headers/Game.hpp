@@ -1,5 +1,6 @@
 #include "Square.hpp"
 #include <vector>
+#include <string>
 
 class Game{
 public:
@@ -10,6 +11,10 @@ public:
     bool playing;
     Square* board;
     std::vector<Square*> snake;
+    //some strings for drawing the game
+    std::string top_bottom_border; // = std::string(width + 2, '=');
+    const char side_border = '|';
+
     Game();
     Game(int width, int height);
     ~Game();
@@ -21,4 +26,6 @@ public:
     void getPlayerInput();
     void play();
     void move();
+    void gameOver();
+    void setBorders();
 };
