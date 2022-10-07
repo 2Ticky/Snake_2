@@ -28,10 +28,12 @@ Game::~Game()
 {
     delete board;
 
-    for( Square* ptr : snake)
+    /*for( Square* ptr : snake)
     {
         delete ptr;
-    }
+    }*/
+
+    std::cout << "\x1b[12B";
 }
 
 void Game::play()
@@ -76,6 +78,7 @@ void Game::draw()
         }
         std::cout<<std::endl;
     }
+    std::cout << "\x1b[12A";
 }
 
 
