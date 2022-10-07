@@ -34,10 +34,12 @@ Game::~Game()
     }*/
 
     std::cout << "\x1b[12B";
+    std::cout<< "\x1b[1;32;5mYou Lose!" << "\x1b[0m" << std::endl;
 }
 
 void Game::play()
 {
+    std::cout<< "\x1b[1;32;5mSnake" << "\x1b[0m" << std::endl;
     playing = true;
     setSnake();
     placeFood();
